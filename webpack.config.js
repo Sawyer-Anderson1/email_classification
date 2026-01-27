@@ -59,6 +59,10 @@ module.exports = async (env, options) => {
       new CopyWebpackPlugin({
         patterns: [
           {
+            from: "./src/spamreporting/spamreporting.js",
+            to: "spamreporting.js"
+          },
+          {
             from: "assets/*",
             to: "assets/[name][ext][query]",
           },
