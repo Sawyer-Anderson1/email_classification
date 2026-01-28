@@ -33,8 +33,7 @@ from sklearn.naive_bayes import BernoulliNB
 
 app = Flask(__name__)
 
-@app.rout('/parse_eml_file', methods=['POST'])
-
+@app.route('/parse_eml_file', methods=['POST'])
 def parse_eml_file():
     # read the http request (get the data and decode from utf-8 )
     raw_eml_string_data = request.data.decode('utf-8')
@@ -55,7 +54,7 @@ def parse_eml_file():
                 body = part.get_payload(decode=True).decode(part.get_content_charset() or 'utf-8')
                 break
             elif content_type =='text/html':
-                html_content = part.get_payload(decode=True).decode(parg.get_content_charset() or 'utf-8')
+                html_content = part.get_payload(decode=True).decode(part.get_content_charset() or 'utf-8')
                 body = html2text.html2text(html_content)
     else:
         body = msg.get_payload(decode=True).decode(msg.get_content_charset() or 'utf-8')
@@ -70,7 +69,7 @@ def parse_eml_file():
     y_pred, y_prob = prep_data(input)
     
     # return the y_pred and y_prob
-    
+    return jsonify({'prediction': y_pred.tolist(), 'probability': y_prob.tolist()})
 
 def prep_data(df):
     exclude_punctuation = set(punctuation)

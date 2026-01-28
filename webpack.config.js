@@ -3,6 +3,7 @@
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -18,8 +19,8 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      taskpane: ["./src/taskpane/taskpane.js", "./src/taskpane/taskpane.html"],
-      commands: "./src/commands/commands.js",
+      dialog: './src/spamreporting/spamReporting.js'
+      
     },
     output: {
       clean: true,
@@ -51,11 +52,6 @@ module.exports = async (env, options) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        filename: "taskpane.html",
-        template: "./src/taskpane/taskpane.html",
-        chunks: ["polyfill", "taskpane"],
-      }),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -86,6 +82,10 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
+      static: {
+        directory: path.join(__dirname, "dist"),
+        publicPath: "/public",
+      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },

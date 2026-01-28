@@ -11,14 +11,16 @@ function onSpamReport(event) {
 
       reader.onload = function(e) {
         // send the raw EML content as a string to python
-        fetch('/src/ai/parse_eml_file', {
+        fetch('/parse_eml_file', {
           method: 'POST',
           headers: {
             'Content-Type': 'text/plain',
           },
           body: e.target.result
         })
-        .then(response => response.json());
+        .then(response => response.json())
+        .then(data => console.log('Model prediction:', data))
+        .catch(error => console.error('Error:', error));
       };
       reader.onerror = function(e) {
         console.log(e.target.error);

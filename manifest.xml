@@ -34,7 +34,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+        <SourceLocation DefaultValue="https://localhost:3000/WebViewRuntime.Url"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -118,14 +118,10 @@
                     <Option resid="Option3.Label"/>
                   </ReportingOptions>
                   <FreeTextLabel resid="FreeText.Label"/>
-                  <MoreInfo>
-                    <MoreInfoText resid="MoreInfo.Label"/>
-                    <MoreInfoUrl resid="MoreInfo.Url"/>
-                  </MoreInfo>
                 </PreProcessingDialog>
 
                 <SourceLocation resid='WebViewRuntime.Url'/>
-              </ResportPhishingCustomization>
+              </ReportPhishingCustomization>
             </ExtensionPoint>
           </DesktopFormFactor>
         </Host>
@@ -142,7 +138,6 @@
         <bt:Urls>
           <bt:Url id="WebViewRuntime.Url" DefaultValue="https://localhost:3000/commands.html"/>
           <bt:Url id="JSRuntime.Url" DefaultValue="https://localhost:3000/spamReporting.js"/>
-          <bt:Url id="MoreInfo.Url" DefaultValue="https://www.contoso.com/spamreporting"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="spamButton.Label" DefaultValue="Report Spam Message"/>
